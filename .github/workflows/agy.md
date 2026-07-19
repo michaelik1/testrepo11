@@ -37,6 +37,15 @@ safe-outputs:
     max: 1
 
 pre-agent-steps:
+  - name: Install Agentic Workflow Firewall
+    run: |
+      set -euo pipefail
+
+      bash "$RUNNER_TEMP/gh-aw/actions/install_awf_binary.sh" v0.27.11
+
+      command -v awf
+      awf --version
+
   - name: Prepare Antigravity OAuth
     env:
       AGY_AUTH_B64: ${{ secrets.AGY_AUTH_B64 }}
